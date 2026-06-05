@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../services/subscription_storage.dart';
+import '../payments/payment_screen.dart';
 
 class ClubScreen extends StatefulWidget {
   const ClubScreen({super.key});
@@ -10,13 +11,15 @@ class ClubScreen extends StatefulWidget {
 
 class _ClubScreenState extends State<ClubScreen> {
   String? currentPlan;
+  String? currentPaymentMethod;
+  double? currentPrice;
   DateTime? startedAt;
   bool loading = true;
 
   final plans = const [
     _PlanData(
       name: 'Essencial',
-      price: 'R\$ 19,90/mês',
+      priceValue: 19.90,
       subtitle: 'Para quem quer desconto fixo e praticidade.',
       benefits: [
         '5% de desconto em serviços',
@@ -26,7 +29,7 @@ class _ClubScreenState extends State<ClubScreen> {
     ),
     _PlanData(
       name: 'Premium',
-      price: 'R\$ 34,90/mês',
+      priceValue: 34.90,
       subtitle: 'O plano mais equilibrado para clientes frequentes.',
       benefits: [
         '10% de desconto em serviços',
@@ -37,7 +40,7 @@ class _ClubScreenState extends State<ClubScreen> {
     ),
     _PlanData(
       name: 'VIP',
-      price: 'R\$ 59,90/mês',
+      priceValue: 59.90,
       subtitle: 'A experiência completa com vantagens máximas.',
       benefits: [
         '15% de desconto em serviços',
@@ -54,19 +57,46 @@ class _ClubScreenState extends State<ClubScreen> {
     _load();
   }
 
+  String _money(double value) {
+    return 'R\$ ${value.toStringAsFixed(2).replaceAll('.', ',')}';
+  }
+
   Future<void> _load() async {
     currentPlan = await SubscriptionStorage.getCurrentPlan();
+    currentPaymentMethod = await SubscriptionStorage.getCurrentPaymentMethod();
+    currentPrice = await SubscriptionStorage.getCurrentPrice();
     startedAt = await SubscriptionStorage.getStartedAt();
     setState(() => loading = false);
   }
 
-  Future<void> _subscribe(String planName) async {
-    await SubscriptionStorage.subscribe(planName);
+  Future<void> _subscribe(_PlanData plan) async {
+    final paymentMethod = await Navigator.push<String>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => PaymentScreen(
+          title: 'Assinatura ${plan.name}',
+          subtitle: plan.subtitle,
+          amount: plan.priceValue,
+          highlights: plan.benefits,
+        ),
+      ),
+    );
+
+    if (paymentMethod == null) return;
+
+    await SubscriptionStorage.subscribe(
+      planName: plan.name,
+      price: plan.priceValue,
+      paymentMethod: paymentMethod,
+    );
+
     await _load();
 
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Plano $planName ativado com sucesso!')),
+      SnackBar(
+        content: Text('Plano ${plan.name} ativado com pagamento via $paymentMethod.'),
+      ),
     );
   }
 
@@ -116,13 +146,27 @@ class _ClubScreenState extends State<ClubScreen> {
                         'Mais desconto, mais prioridade e uma experiência premium para o cliente.',
                         style: TextStyle(color: Colors.grey.shade400),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 14),
                       Text(
                         currentPlan == null
                             ? 'Nenhum plano ativo no momento.'
                             : 'Plano ativo: $currentPlan',
                         style: const TextStyle(fontWeight: FontWeight.w700),
                       ),
+                      if (currentPrice != null) ...[
+                        const SizedBox(height: 4),
+                        Text(
+                          'Valor: ${_money(currentPrice!)}',
+                          style: TextStyle(color: Colors.grey.shade400),
+                        ),
+                      ],
+                      if (currentPaymentMethod != null) ...[
+                        const SizedBox(height: 4),
+                        Text(
+                          'Pago via: $currentPaymentMethod',
+                          style: TextStyle(color: Colors.grey.shade400),
+                        ),
+                      ],
                       if (startedAt != null) ...[
                         const SizedBox(height: 4),
                         Text(
@@ -138,7 +182,8 @@ class _ClubScreenState extends State<ClubScreen> {
                   (plan) => _PlanCard(
                     data: plan,
                     active: currentPlan == plan.name,
-                    onSubscribe: () => _subscribe(plan.name),
+                    onSubscribe: () => _subscribe(plan),
+                    moneyText: _money(plan.priceValue),
                   ),
                 ),
               ],
@@ -151,15 +196,19 @@ class _PlanCard extends StatelessWidget {
   final _PlanData data;
   final bool active;
   final VoidCallback onSubscribe;
+  final String moneyText;
 
   const _PlanCard({
     required this.data,
     required this.active,
     required this.onSubscribe,
+    required this.moneyText,
   });
 
   @override
   Widget build(BuildContext context) {
+    final gold = Theme.of(context).colorScheme.primary;
+
     return Container(
       margin: const EdgeInsets.only(bottom: 14),
       padding: const EdgeInsets.all(18),
@@ -167,9 +216,7 @@ class _PlanCard extends StatelessWidget {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(26),
         border: Border.all(
-          color: active
-              ? Theme.of(context).colorScheme.primary
-              : Colors.transparent,
+          color: active ? gold : Colors.transparent,
         ),
       ),
       child: Column(
@@ -187,9 +234,9 @@ class _PlanCard extends StatelessWidget {
                 ),
               ),
               Text(
-                data.price,
+                moneyText,
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: gold,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -209,7 +256,7 @@ class _PlanCard extends StatelessWidget {
                   Icon(
                     Icons.check_circle_outline,
                     size: 18,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: gold,
                   ),
                   const SizedBox(width: 8),
                   Expanded(child: Text(benefit)),
@@ -220,7 +267,7 @@ class _PlanCard extends StatelessWidget {
           const SizedBox(height: 14),
           FilledButton(
             onPressed: active ? null : onSubscribe,
-            child: Text(active ? 'Plano ativo' : 'Assinar plano'),
+            child: Text(active ? 'Plano ativo' : 'Assinar agora'),
           ),
         ],
       ),
@@ -230,13 +277,13 @@ class _PlanCard extends StatelessWidget {
 
 class _PlanData {
   final String name;
-  final String price;
+  final double priceValue;
   final String subtitle;
   final List<String> benefits;
 
   const _PlanData({
     required this.name,
-    required this.price,
+    required this.priceValue,
     required this.subtitle,
     required this.benefits,
   });

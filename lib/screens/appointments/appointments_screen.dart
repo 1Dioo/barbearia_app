@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/appointment_model.dart';
 import '../../services/appointment_storage.dart';
+import '../payments/payment_screen.dart';
 
 class AppointmentsScreen extends StatefulWidget {
   const AppointmentsScreen({super.key});
@@ -24,16 +25,20 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     'Barbeiro João',
     'Barbeiro Lucas',
     'Barbeiro Pedro',
+    'Barbeiro Emanuel',
+    'Barbeiro Rodrigo',
+    'Barbeiro Gabriel',
   ];
 
   final List<String> _times = const [
     '09:00',
     '10:00',
     '11:00',
+    '12:00',
+    '13:00',
     '14:00',
     '15:00',
     '16:00',
-    '17:00',
   ];
 
   String? _selectedService;
@@ -62,13 +67,40 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     setState(() => _loading = false);
   }
 
+  double _getServicePrice(String service) {
+    switch (service) {
+      case 'Corte Degradê':
+        return 35.0;
+      case 'Barba Completa':
+        return 25.0;
+      case 'Combo Barba + Corte':
+        return 55.0;
+      case 'Sobrancelha':
+        return 10.0;
+      case 'Acabamento':
+        return 15.0;
+      default:
+        return 20.0;
+    }
+  }
+
+  String _money(double value) {
+    return 'R\$ ${value.toStringAsFixed(2).replaceAll('.', ',')}';
+  }
+
   Future<void> _pickDate() async {
     final now = DateTime.now();
     final picked = await showDatePicker(
       context: context,
+      locale: const Locale('pt', 'BR'),
       initialDate: _selectedDate ?? now,
       firstDate: now,
       lastDate: now.add(const Duration(days: 365)),
+      helpText: 'Selecionar data',
+      cancelText: 'Cancelar',
+      confirmText: 'Confirmar',
+      fieldLabelText: 'Data',
+      fieldHintText: 'dd/mm/aaaa',
     );
 
     if (picked != null) {
@@ -89,6 +121,28 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
       return;
     }
 
+    final price = _getServicePrice(_selectedService!);
+
+    final paymentMethod = await Navigator.push<String>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => PaymentScreen(
+          title: 'Pagamento do agendamento',
+          subtitle: _selectedService!,
+          amount: price,
+          highlights: [
+            _selectedBarber!,
+            _selectedTime!,
+            _selectedDate == null
+                ? ''
+                : '${_selectedDate!.day.toString().padLeft(2, '0')}/${_selectedDate!.month.toString().padLeft(2, '0')}/${_selectedDate!.year}',
+          ].where((item) => item.isNotEmpty).toList(),
+        ),
+      ),
+    );
+
+    if (paymentMethod == null) return;
+
     await AppointmentStorage.addAppointment(
       AppointmentModel(
         service: _selectedService!,
@@ -96,6 +150,8 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
         dateIso: _selectedDate!.toIso8601String(),
         time: _selectedTime!,
         notes: _notesCtrl.text.trim(),
+        paymentMethod: paymentMethod,
+        price: price,
       ),
     );
 
@@ -111,7 +167,11 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
 
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Agendamento salvo com sucesso!')),
+      SnackBar(
+        content: Text(
+          'Pagamento aprovado via $paymentMethod. Agendamento salvo com sucesso!',
+        ),
+      ),
     );
   }
 
@@ -123,6 +183,10 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final priceText = _selectedService == null
+        ? null
+        : _money(_getServicePrice(_selectedService!));
+
     return SafeArea(
       child: ListView(
         padding: const EdgeInsets.all(18),
@@ -133,7 +197,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Escolha o serviço, barbeiro, data e horário.',
+            'Escolha o serviço, barbeiro, data e horário. O pagamento será solicitado ao confirmar.',
             style: TextStyle(color: Colors.grey.shade400),
           ),
           const SizedBox(height: 20),
@@ -153,6 +217,23 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 .toList(),
             onChanged: (value) => setState(() => _selectedService = value),
           ),
+          if (priceText != null) ...[
+            const SizedBox(height: 12),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Text(
+                'Valor do serviço: $priceText',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ],
           const SizedBox(height: 14),
           DropdownButtonFormField<String>(
             value: _selectedBarber,
@@ -173,16 +254,30 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
           const SizedBox(height: 14),
           InkWell(
             onTap: _pickDate,
-            borderRadius: BorderRadius.circular(18),
-            child: InputDecorator(
-              decoration: const InputDecoration(
-                labelText: 'Data',
-                prefixIcon: Icon(Icons.calendar_month),
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.circular(20),
               ),
-              child: Text(
-                _selectedDate == null
-                    ? 'Selecionar data'
-                    : _formatDate(_selectedDate!),
+              child: Row(
+                children: [
+                  const Icon(Icons.calendar_month),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      _selectedDate == null
+                          ? 'Escolher data do atendimento'
+                          : _formatDate(_selectedDate!),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  const Icon(Icons.arrow_drop_down),
+                ],
               ),
             ),
           ),
@@ -212,8 +307,8 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
           const SizedBox(height: 18),
           FilledButton.icon(
             onPressed: _saveAppointment,
-            icon: const Icon(Icons.event_available),
-            label: const Text('Confirmar agendamento'),
+            icon: const Icon(Icons.lock_outline),
+            label: const Text('Pagar e agendar'),
           ),
           const SizedBox(height: 24),
           Text(
@@ -252,7 +347,14 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                       ),
                     ),
                     const SizedBox(height: 6),
-                    Text('${item.barber} • ${_formatDate(item.date)} • ${item.time}'),
+                    Text(
+                      '${item.barber} • ${_formatDate(item.date)} • ${item.time}',
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      'Pagamento: ${item.paymentMethod} • ${_money(item.price)}',
+                      style: TextStyle(color: Colors.grey.shade400),
+                    ),
                     if (item.notes.isNotEmpty) ...[
                       const SizedBox(height: 6),
                       Text(

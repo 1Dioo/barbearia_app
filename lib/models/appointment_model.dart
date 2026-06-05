@@ -1,11 +1,21 @@
 import 'dart:convert';
 
+double _parseDouble(dynamic value) {
+  if (value is num) return value.toDouble();
+  if (value is String) {
+    return double.tryParse(value.replaceAll(',', '.')) ?? 0.0;
+  }
+  return 0.0;
+}
+
 class AppointmentModel {
   final String service;
   final String barber;
   final String dateIso;
   final String time;
   final String notes;
+  final String paymentMethod;
+  final double price;
 
   const AppointmentModel({
     required this.service,
@@ -13,6 +23,8 @@ class AppointmentModel {
     required this.dateIso,
     required this.time,
     required this.notes,
+    this.paymentMethod = 'Não informado',
+    this.price = 0.0,
   });
 
   DateTime get date => DateTime.parse(dateIso);
@@ -24,6 +36,8 @@ class AppointmentModel {
       'dateIso': dateIso,
       'time': time,
       'notes': notes,
+      'paymentMethod': paymentMethod,
+      'price': price,
     };
   }
 
@@ -34,12 +48,16 @@ class AppointmentModel {
       dateIso: map['dateIso'] ?? '',
       time: map['time'] ?? '',
       notes: map['notes'] ?? '',
+      paymentMethod: map['paymentMethod'] ?? 'Não informado',
+      price: _parseDouble(map['price']),
     );
   }
 
   String toJson() => jsonEncode(toMap());
 
   factory AppointmentModel.fromJson(String source) {
-    return AppointmentModel.fromMap(jsonDecode(source) as Map<String, dynamic>);
+    return AppointmentModel.fromMap(
+      jsonDecode(source) as Map<String, dynamic>,
+    );
   }
 }

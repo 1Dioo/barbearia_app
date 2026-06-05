@@ -13,24 +13,94 @@ class PromotionsScreen extends StatelessWidget {
             'Promoções',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
+
           const SizedBox(height: 8),
+
           Text(
-            'Cartazes promocionais e ofertas especiais.',
-            style: TextStyle(color: Colors.grey.shade400),
+            'Confira nossas ofertas especiais e campanhas da semana.',
+            style: TextStyle(
+              color: Colors.grey.shade400,
+            ),
           ),
-          const SizedBox(height: 18),
+
+          const SizedBox(height: 20),
+
+          ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: Image.asset(
+              'assets/images/promos/banner_top.jpg',
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) {
+                return Container(
+                  height: 180,
+                  color: Colors.black54,
+                  child: const Center(
+                    child: Text(
+                      'Banner Superior',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+
+          const SizedBox(height: 22),
+
           _PromoCard(
             title: 'Semana do Corte',
             description:
-                'Desconto especial no corte masculino de segunda a quinta.',
+                'Desconto especial em cortes masculinos de segunda a quinta-feira.',
             badge: 'OFERTA',
           ),
+
           const SizedBox(height: 14),
+
           _PromoCard(
             title: 'Combo Barba + Corte',
-            description: 'Visual completo com preço promocional.',
+            description:
+                'Visual completo com preço promocional e atendimento premium.',
             badge: 'PROMO',
           ),
+
+          const SizedBox(height: 14),
+
+          _PromoCard(
+            title: 'Cliente Fidelidade',
+            description:
+                'Clientes frequentes recebem descontos e benefícios exclusivos.',
+            badge: 'VIP',
+          ),
+
+          const SizedBox(height: 22),
+
+          ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: Image.asset(
+              'assets/images/promos/banner_bottom.jpg',
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) {
+                return Container(
+                  height: 180,
+                  color: Colors.black54,
+                  child: const Center(
+                    child: Text(
+                      'Banner Inferior',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+
+          const SizedBox(height: 20),
         ],
       ),
     );
@@ -50,51 +120,46 @@ class _PromoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final gold = Theme.of(context).colorScheme.primary;
+
     return Container(
+      padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(24),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Row(
-          children: [
-            Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Icon(Icons.local_offer_outlined),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 5,
             ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    badge,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(description),
-                ],
+            decoration: BoxDecoration(
+              color: gold,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Text(
+              badge,
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
-          ],
-        ),
+          ),
+
+          const SizedBox(height: 12),
+
+          Text(
+            title,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+
+          const SizedBox(height: 8),
+
+          Text(description),
+        ],
       ),
     );
   }

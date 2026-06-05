@@ -2,196 +2,141 @@
 
 ## Sobre o Projeto
 
-O Barbearia App é um aplicativo mobile desenvolvido em Flutter com o objetivo de modernizar o processo de atendimento em uma barbearia, oferecendo uma experiência digital prática, intuitiva e organizada para clientes e administradores.
+O Barbearia App é um aplicativo mobile desenvolvido em Flutter com o objetivo de digitalizar e modernizar os serviços de uma barbearia, proporcionando uma experiência mais prática, rápida e organizada para os clientes.
 
-Este projeto foi desenvolvido como atividade acadêmica proposta pelo professor da disciplina, tendo como finalidade aplicar conceitos de desenvolvimento mobile, organização de projetos, experiência do usuário (UX/UI), persistência de dados e boas práticas de programação.
+O projeto foi desenvolvido como atividade acadêmica proposta pelo professor da disciplina, com foco na aplicação de conceitos de desenvolvimento mobile, design de interfaces, persistência de dados, arquitetura de software e experiência do usuário.
 
----
-
-## Objetivos
-
-O principal objetivo do aplicativo é permitir que clientes possam interagir com a barbearia de forma digital, realizando ações como:
-
-* Criar uma conta.
-* Realizar login.
-* Editar informações pessoais.
-* Adicionar foto de perfil.
-* Visualizar promoções.
-* Conhecer serviços oferecidos.
-* Realizar agendamentos.
-* Acompanhar benefícios e planos de assinatura.
-
-Além disso, o projeto busca demonstrar conhecimentos em desenvolvimento utilizando Flutter e Dart, seguindo uma arquitetura organizada e escalável.
+A aplicação simula um sistema completo de atendimento para uma barbearia moderna, permitindo cadastro de usuários, agendamento de horários, visualização de promoções, contratação de assinaturas e gerenciamento do perfil do cliente.
 
 ---
 
-## Tecnologias Utilizadas
+# Objetivos
 
-### Framework
+O projeto foi criado com os seguintes objetivos:
+
+* Aplicar conceitos de desenvolvimento mobile utilizando Flutter.
+* Desenvolver uma interface moderna e intuitiva.
+* Simular um sistema real de gerenciamento para barbearias.
+* Trabalhar persistência local de dados.
+* Utilizar componentes reutilizáveis.
+* Demonstrar boas práticas de programação.
+
+---
+
+# Tecnologias Utilizadas
+
+## Framework
 
 * Flutter
 
-### Linguagem
+## Linguagem
 
 * Dart
 
-### Persistência Local
-
-* SharedPreferences
-
-### Bibliotecas Utilizadas
-
-* image_picker
-* shared_preferences
-* google_fonts
-
 ---
 
-## Funcionalidades Implementadas
+# Funcionalidades Implementadas
 
-### Sistema de Autenticação
+## Sistema de Autenticação
 
 * Cadastro de usuários.
-* Login de usuários.
+* Login.
 * Logout.
-* Armazenamento local das informações.
+* Armazenamento local dos dados.
 
-### Perfil do Usuário
+## Perfil do Usuário
 
-* Visualização de dados pessoais.
+* Visualização de informações pessoais.
 * Alteração de nome.
 * Alteração de telefone.
 * Upload de foto de perfil.
 * Persistência da imagem após fechar o aplicativo.
 
-### Sistema de Promoções
+## Agendamento de Horários
 
-* Exibição de banners promocionais.
-* Interface preparada para futuras campanhas.
-* Destaques visuais para ofertas especiais.
+* Escolha de serviço.
+* Escolha de barbeiro.
+* Seleção de data.
+* Seleção de horário.
+* Histórico de agendamentos.
+* Calendário totalmente em português (Brasil).
 
-### Agendamento
+## Sistema de Pagamentos
 
-* Seleção de serviços.
-* Escolha de data.
-* Escolha de horário.
-* Histórico local de agendamentos.
+* Simulação de pagamento via PIX.
+* Simulação de pagamento via cartão de crédito.
+* Simulação de pagamento via carteiras digitais.
+* Preparado para integração futura com gateways reais.
 
-### Clube de Assinaturas
+## Clube de Assinaturas
 
-* Exibição de plano ativo.
-* Área dedicada para benefícios.
-* Estrutura preparada para futuras expansões.
+* Exibição do plano ativo.
+* Benefícios exclusivos.
+* Estrutura preparada para expansão futura.
 
-### Interface Moderna
+## Promoções
 
-* Design responsivo.
-* Tema escuro personalizado.
-* Tipografia personalizada com Google Fonts.
+* Tela exclusiva de promoções.
+* Banners promocionais.
+* Divulgação de campanhas e descontos.
+
+## Interface Moderna
+
+* Splash Screen personalizada.
+* Tema escuro premium.
+* Tipografia personalizada.
 * Componentes reutilizáveis.
 * Navegação intuitiva.
+* Layout responsivo.
 
 ---
 
-## Estrutura do Projeto
+# Funcionalidades Demonstradas na Apresentação
 
-```text
-lib/
-│
-├── core/
-│   ├── app_brand.dart
-│   └── app_theme.dart
-│
-├── models/
-│   ├── app_user.dart
-│   ├── promo_model.dart
-│   └── appointment_model.dart
-│
-├── services/
-│   ├── auth_storage.dart
-│   ├── appointment_storage.dart
-│   └── subscription_storage.dart
-│
-├── screens/
-│   ├── auth/
-│   ├── home/
-│   ├── profile/
-│   ├── appointments/
-│   └── subscription/
-│
-├── widgets/
-│   ├── primary_action_button.dart
-│   ├── stat_card.dart
-│   └── custom_widgets.dart
-│
-└── main.dart
-```
+Durante a apresentação do projeto é possível demonstrar:
+
+* Cadastro de usuário.
+* Login.
+* Alteração de perfil.
+* Upload de foto.
+* Agendamento de horários.
+* Seleção de serviços.
+* Sistema de pagamentos.
+* Clube de assinaturas.
+* Promoções.
+* Galeria de cortes.
+* Navegação entre telas.
+* Persistência de dados.
 
 ---
 
-## Como Executar o Projeto
+# Aprendizados Obtidos
 
-### Instalar Dependências
-
-```bash
-flutter pub get
-```
-
-### Executar em Modo Debug
-
-```bash
-flutter run
-```
-
-### Gerar APK
-
-```bash
-flutter build apk --release
-```
-
-O arquivo APK será gerado em:
-
-```text
-build/app/outputs/flutter-apk/app-release.apk
-```
-
----
-
-## Possíveis Melhorias Futuras
-
-* Integração com Firebase.
-* Banco de dados online.
-* Sistema de notificações.
-* Pagamentos integrados.
-* Área administrativa.
-* Avaliação de serviços.
-* Programa de fidelidade.
-* Chat entre cliente e barbeiro.
-* Agendamento em tempo real.
-
----
-
-## Aprendizados Obtidos
-
-Durante o desenvolvimento deste projeto foram trabalhados conceitos importantes de:
+Durante o desenvolvimento deste projeto foram aplicados conhecimentos relacionados a:
 
 * Desenvolvimento Mobile.
-* Flutter e Dart.
-* Organização de código.
-* Persistência de dados.
-* Gerenciamento de estado.
-* Design de interfaces.
-* Experiência do usuário (UX/UI).
-* Estruturação de projetos escaláveis.
+* Flutter.
+* Dart.
+* Persistência Local.
+* Estruturação de Projetos.
+* UX/UI.
+* Componentização.
+* Navegação entre telas.
+* Gerenciamento de Estado.
+* Arquitetura de Aplicações.
 
 ---
 
-## Equipe
+# Equipe
 
-Projeto desenvolvido para fins acadêmicos como atividade prática da disciplina de desenvolvimento de software, com foco em aplicação mobile utilizando Flutter.
+Projeto desenvolvido para fins acadêmicos como atividade prática da disciplina de desenvolvimento de software.
+
+O objetivo principal foi aplicar conceitos de programação e desenvolvimento mobile na construção de uma aplicação funcional baseada em um cenário real de negócio.
 
 ---
 
-## Licença
+# Licença
 
 Este projeto possui finalidade exclusivamente educacional e acadêmica.
+
+Seu uso é destinado apenas para estudos, aprendizado e demonstrações em ambiente escolar ou universitário.
