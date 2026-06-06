@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../models/appointment_model.dart';
 import '../../services/appointment_storage.dart';
 import '../payments/payment_screen.dart';
+import '../gallery/gallery_screen.dart';
 
 class AppointmentsScreen extends StatefulWidget {
   const AppointmentsScreen({super.key});
@@ -15,6 +16,12 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
 
   final List<String> _services = const [
     'Corte Degradê',
+    'Low Fade',
+    'Mid Fade',
+    'Social Clássico',
+    'Corte Americano',
+    'Buzz Cut',
+    'Moicano',
     'Barba Completa',
     'Combo Barba + Corte',
     'Sobrancelha',
@@ -25,7 +32,6 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     'Barbeiro João',
     'Barbeiro Lucas',
     'Barbeiro Pedro',
-    'Barbeiro Emanuel',
     'Barbeiro Rodrigo',
     'Barbeiro Gabriel',
   ];
@@ -64,6 +70,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
   Future<void> _loadAppointments() async {
     setState(() => _loading = true);
     _appointments = await AppointmentStorage.getAppointmentsForCurrentUser();
+    if (!mounted) return;
     setState(() => _loading = false);
   }
 
@@ -71,6 +78,18 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     switch (service) {
       case 'Corte Degradê':
         return 35.0;
+      case 'Low Fade':
+        return 35.0;
+      case 'Mid Fade':
+        return 35.0;
+      case 'Social Clássico':
+        return 30.0;
+      case 'Corte Americano':
+        return 40.0;
+      case 'Buzz Cut':
+        return 25.0;
+      case 'Moicano':
+        return 40.0;
       case 'Barba Completa':
         return 25.0;
       case 'Combo Barba + Corte':
@@ -156,6 +175,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     );
 
     _notesCtrl.clear();
+
     setState(() {
       _selectedService = null;
       _selectedBarber = null;
@@ -197,8 +217,46 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Escolha o serviço, barbeiro, data e horário. O pagamento será solicitado ao confirmar.',
-            style: TextStyle(color: Colors.grey.shade400),
+            'Escolha seu corte, veja a galeria, selecione barbeiro, data e horário. O pagamento será solicitado ao confirmar.',
+            style: TextStyle(color: Colors.grey.shade400, height: 1.35),
+          ),
+          const SizedBox(height: 18),
+          Container(
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Inspire-se antes de agendar',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Veja nossa galeria de cortes e escolha o estilo ideal para você.',
+                  style: TextStyle(color: Colors.grey.shade400),
+                ),
+                const SizedBox(height: 14),
+                FilledButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const GalleryScreen(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.photo_library),
+                  label: const Text('Ver Galeria de Cortes'),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 20),
           DropdownButtonFormField<String>(

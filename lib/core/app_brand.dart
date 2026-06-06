@@ -1,4 +1,4 @@
 class AppBrand {
-  static const appName = 'Barbearia Aurora';
-  static const slogan = 'Seu estilo em cena.';
+  static const appName = 'Royal Barber';
+  static const slogan = 'Seu estilo, nossa arte';
 }

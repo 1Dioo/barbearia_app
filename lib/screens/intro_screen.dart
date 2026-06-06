@@ -56,6 +56,12 @@ class _IntroScreenState extends State<IntroScreen> {
     ),
   ];
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   Future<void> _finish() async {
     await AuthStorage.setIntroSeen(true);
     if (!mounted) return;
@@ -121,6 +127,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 itemCount: slides.length,
                 itemBuilder: (_, i) {
                   final slide = slides[i];
+
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 18),
                     child: Container(
@@ -131,8 +138,8 @@ class _IntroScreenState extends State<IntroScreen> {
                       clipBehavior: Clip.antiAlias,
                       child: Column(
                         children: [
-                          Expanded(
-                            flex: 6,
+                          Flexible(
+                            flex: 5,
                             child: Stack(
                               fit: StackFit.expand,
                               children: [
@@ -177,13 +184,12 @@ class _IntroScreenState extends State<IntroScreen> {
                               ],
                             ),
                           ),
-                          Expanded(
-                            flex: 5,
-                            child: Padding(
+                          Flexible(
+                            flex: 4,
+                            child: SingleChildScrollView(
                               padding: const EdgeInsets.all(18),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     slide.title,

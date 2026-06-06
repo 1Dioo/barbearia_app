@@ -91,6 +91,7 @@ O projeto foi criado com os seguintes objetivos:
 
 ---
 
+<<<<<<< HEAD
 # Funcionalidades Demonstradas na Apresentação
 
 Durante a apresentação do projeto é possível demonstrar:
@@ -113,6 +114,25 @@ Durante a apresentação do projeto é possível demonstrar:
 # Aprendizados Obtidos
 
 Durante o desenvolvimento deste projeto foram aplicados conhecimentos relacionados a:
+=======
+## Possíveis Melhorias Futuras
+
+* Integração com Firebase.
+* Banco de dados online.
+* Sistema de notificações.
+* Pagamentos integrados.
+* Área administrativa.
+* Avaliação de serviços.
+* Programa de fidelidade.
+* Chat entre cliente e barbeiro.
+* Agendamento em tempo real.
+
+---
+
+## Aprendizados Obtidos
+
+Durante o desenvolvimento deste projeto foram trabalhados conceitos importantes de:
+>>>>>>> 8042b99db13f2c66b0fd6a4a549a14b297d7b590
 
 * Desenvolvimento Mobile.
 * Flutter.

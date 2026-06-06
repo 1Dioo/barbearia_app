@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/app_brand.dart';
 import '../../widgets/section_title.dart';
 import '../appointments/appointments_screen.dart';
+import '../gallery/gallery_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,6 +17,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gold = Theme.of(context).colorScheme.primary;
+    final isCompact = MediaQuery.of(context).size.width < 380;
+    final bannerHeight = MediaQuery.of(context).size.width < 600 ? 280.0 : 340.0;
 
     return SafeArea(
       child: ListView(
@@ -55,11 +58,8 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 22),
-          Container(
-            height: 220,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-            ),
+          SizedBox(
+            height: bannerHeight,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(30),
               child: Stack(
@@ -91,36 +91,65 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Text(
-                          'Seu estilo começa aqui',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                  Positioned(
+                    left: 18,
+                    right: 18,
+                    bottom: 18,
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.35),
+                        borderRadius: BorderRadius.circular(22),
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.08),
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Visual premium',
+                            style: TextStyle(
+                              fontSize: isCompact ? 22 : 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              height: 1.05,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Agende seu horário, aproveite promoções exclusivas e mantenha seu visual sempre impecável.',
-                          style: TextStyle(
-                            color: Colors.grey.shade300,
+                          const SizedBox(height: 8),
+                          Text(
+                            'Cortes modernos, barbeiros experientes e atendimento de alto nível',
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: Colors.grey.shade300,
+                              height: 1.3,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 16),
-                        FilledButton.icon(
-                          onPressed: () {
-                            _open(context, const AppointmentsScreen());
-                          },
-                          icon: const Icon(Icons.calendar_month),
-                          label: const Text('Agendar agora'),
-                        ),
-                      ],
+                          const SizedBox(height: 14),
+                          Wrap(
+                            spacing: 12,
+                            runSpacing: 12,
+                            children: [
+                              FilledButton.icon(
+                                onPressed: () {
+                                  _open(context, const AppointmentsScreen());
+                                },
+                                icon: const Icon(Icons.calendar_month),
+                                label: const Text('Agendar agora'),
+                              ),
+                              OutlinedButton.icon(
+                                onPressed: () {
+                                  _open(context, const GalleryScreen());
+                                },
+                                icon: const Icon(Icons.photo_library_outlined),
+                                label: const Text('Ver galeria'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

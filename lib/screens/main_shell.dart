@@ -45,7 +45,7 @@ class _MainShellState extends State<MainShell> {
           ),
           NavigationDestination(
             icon: Icon(Icons.local_offer_outlined),
-            label: 'Promoções',
+            label: 'Ofertas',
           ),
           NavigationDestination(
             icon: Icon(Icons.person_outline),
