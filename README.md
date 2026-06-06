@@ -1,8 +1,8 @@
-# Barbearia App
+# Royal Barber
 
 ## Sobre o Projeto
 
-O Barbearia App é um aplicativo mobile desenvolvido em Flutter com o objetivo de digitalizar e modernizar os serviços de uma barbearia, proporcionando uma experiência mais prática, rápida e organizada para os clientes.
+O Royal Barber é um aplicativo mobile desenvolvido em Flutter com o objetivo de digitalizar e modernizar os serviços de uma barbearia, proporcionando uma experiência mais prática, rápida e organizada para os clientes.
 
 O projeto foi desenvolvido como atividade acadêmica proposta pelo professor da disciplina, com foco na aplicação de conceitos de desenvolvimento mobile, design de interfaces, persistência de dados, arquitetura de software e experiência do usuário.
 
