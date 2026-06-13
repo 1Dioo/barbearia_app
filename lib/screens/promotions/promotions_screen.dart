@@ -1,3 +1,11 @@
+/*
+ * Arquivo: promotions_screen.dart
+ * Responsável por exibir promoções e ofertas disponíveis.
+ * Apresenta banners promocionais e cartões com descontos,
+ * campanhas especiais e benefícios para os clientes.
+ * Funciona como uma vitrine de promoções da barbearia.
+ */
+
 import 'package:flutter/material.dart';
 
 class PromotionsScreen extends StatelessWidget {
