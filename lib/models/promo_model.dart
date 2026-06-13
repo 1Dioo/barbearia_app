@@ -1,3 +1,12 @@
+/*
+  Modelo utilizado para armazenar
+  informações das promoções exibidas
+  no aplicativo.
+
+  Contém título, descrição, imagem
+  e identificação da promoção.
+*/
+
 class PromoModel {
   final String title;
   final String description;
