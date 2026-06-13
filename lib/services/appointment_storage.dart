@@ -2,6 +2,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/appointment_model.dart';
 import 'auth_storage.dart';
 
+/*
+ * Classe responsável pelo gerenciamento dos agendamentos.
+ *
+ * Realiza o armazenamento e recuperação dos horários marcados
+ * pelos usuários utilizando o SharedPreferences como persistência local.
+ */
+
 class AppointmentStorage {
   static Future<SharedPreferences> get _prefs async =>
       SharedPreferences.getInstance();
