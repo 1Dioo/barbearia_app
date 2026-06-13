@@ -4,6 +4,13 @@ import '../../models/app_user.dart';
 import '../../services/auth_storage.dart';
 import '../main_shell.dart';
 
+/*
+ * Tela de cadastro de usuários.
+ *
+ * Permite criar uma nova conta informando
+ * nome, telefone, email e senha.
+ */
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
