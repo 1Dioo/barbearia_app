@@ -1,3 +1,12 @@
+/*
+  Classe responsável por armazenar
+  dados fictícios utilizados durante
+  o desenvolvimento e testes do sistema.
+
+  Contém listas de serviços e promoções
+  exibidas no aplicativo.
+*/
+
 import '../models/service_model.dart';
 import '../models/promo_model.dart';
 
