@@ -1,3 +1,12 @@
+/*
+ * Arquivo: profile_screen.dart
+ * Responsável pelo gerenciamento do perfil do usuário.
+ * Permite visualizar e editar informações pessoais,
+ * alterar foto de perfil, visualizar dados da assinatura
+ * e realizar logout da conta.
+ * Também exibe estatísticas e informações da conta.
+ */
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
