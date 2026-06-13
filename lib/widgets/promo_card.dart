@@ -1,3 +1,10 @@
+/*
+ * Widget responsável pela exibição de promoções da barbearia.
+ *
+ * Exibe imagem, título, descrição e selo de destaque
+ * utilizando informações fornecidas pelo modelo PromoModel.
+ */
+
 import 'package:flutter/material.dart';
 import '../models/promo_model.dart';
 
