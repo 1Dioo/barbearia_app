@@ -1,3 +1,11 @@
+/*
+ * Arquivo: splash_screen.dart
+ * Responsável pela tela de carregamento inicial do aplicativo.
+ * Exibe uma animação simples enquanto o sistema inicia.
+ * Após alguns segundos, redireciona o usuário para o EntryGate,
+ * que decide qual tela será aberta.
+ */
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../entry_gate.dart';
