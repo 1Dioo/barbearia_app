@@ -1,6 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/app_user.dart';
 
+/*
+ * Classe responsável pelo gerenciamento da autenticação.
+ *
+ * Controla cadastro, login, logout, informações do usuário,
+ * exibição da introdução inicial e armazenamento local dos dados.
+ */
+
 class AuthStorage {
   static const _usersKey = 'users_key';
   static const _currentUserKey = 'current_user_key';
