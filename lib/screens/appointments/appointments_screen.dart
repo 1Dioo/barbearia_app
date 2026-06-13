@@ -1,3 +1,22 @@
+/*
+  appointments_screen.dart
+
+  Esta tela permite que o usuário realize agendamentos de serviços
+  disponíveis na barbearia.
+
+  O usuário pode:
+  - Escolher um tipo de serviço.
+  - Selecionar um barbeiro.
+  - Definir uma data para o atendimento.
+  - Escolher um horário disponível.
+  - Informar observações adicionais.
+  - Efetuar o pagamento do serviço.
+
+  Após a confirmação do pagamento, o agendamento é salvo
+  utilizando o serviço AppointmentStorage e exibido na
+  lista de agendamentos do usuário.
+*/
+
 import 'package:flutter/material.dart';
 import '../../models/appointment_model.dart';
 import '../../services/appointment_storage.dart';
