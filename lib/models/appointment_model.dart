@@ -1,3 +1,15 @@
+/*
+  Modelo responsável por representar
+  um agendamento realizado pelo usuário.
+
+  Armazena informações do serviço,
+  barbeiro escolhido, data, horário,
+  observações, forma de pagamento e valor.
+
+  Possui métodos para conversão entre
+  objeto, Map e JSON.
+*/
+
 import 'dart:convert';
 
 double _parseDouble(dynamic value) {
