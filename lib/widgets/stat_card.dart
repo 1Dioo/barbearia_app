@@ -1,3 +1,11 @@
+/*
+ * Widget responsável por exibir informações estatísticas
+ * e indicadores visuais do aplicativo.
+ *
+ * Apresenta um ícone, valor numérico e descrição,
+ * auxiliando na visualização rápida de dados importantes.
+ */
+
 import 'package:flutter/material.dart';
 
 class StatCard extends StatelessWidget {
