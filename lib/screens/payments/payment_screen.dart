@@ -1,3 +1,9 @@
+/*
+ * Tela de pagamento do aplicativo.
+ * Permite selecionar uma forma de pagamento
+ * e simula a confirmação da compra ou assinatura.
+ */
+
 import 'package:flutter/material.dart';
 
 class PaymentScreen extends StatefulWidget {
