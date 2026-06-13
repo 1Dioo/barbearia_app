@@ -1,6 +1,21 @@
+/*
+ * Classe responsável pela configuração visual global do aplicativo.
+ *
+ * Define cores, tipografia, componentes personalizados e tema
+ * principal utilizado em toda a interface da Royal Barber,
+ * garantindo padronização visual e melhor experiência do usuário.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/*
+ * Classe responsável pela configuração visual global do aplicativo.
+ *
+ * Define cores, tipografia, componentes personalizados e tema
+ * principal utilizado em toda a interface da Royal Barber,
+ * garantindo padronização visual e melhor experiência do usuário.
+ */
 class AppTheme {
   static const darkBg = Color(0xFF0F0F10);
   static const surface = Color(0xFF17171A);
