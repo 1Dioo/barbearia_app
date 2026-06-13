@@ -1,3 +1,9 @@
+/*
+ * Tela de galeria.
+ * Mostra fotos dos cortes disponíveis e permite
+ * visualizar as imagens em tamanho ampliado.
+ */
+
 import 'package:flutter/material.dart';
 
 class GalleryScreen extends StatelessWidget {
