@@ -1,5 +1,12 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+/*
+ * Classe responsável pelo gerenciamento das assinaturas.
+ *
+ * Armazena informações do plano contratado, método de pagamento,
+ * valor da assinatura e data de início utilizando persistência local.
+ */
+
 class SubscriptionStorage {
   static const _planKey = 'subscription_plan_key';
   static const _priceKey = 'subscription_price_key';
