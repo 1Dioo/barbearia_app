@@ -1,3 +1,10 @@
+/*
+* Widget principal da aplicação Royal Barber.
+* Responsável por configurar o MaterialApp,
+* definir tema, idioma, tela inicial e
+* configurações globais da interface.
+*/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/app_brand.dart';
