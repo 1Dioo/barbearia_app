@@ -1,3 +1,10 @@
+/*
+ * Widget de ação rápida utilizado como atalho de navegação.
+ *
+ * Exibe um ícone e um texto para facilitar o acesso às
+ * principais funcionalidades do aplicativo.
+ */
+
 import 'package:flutter/material.dart';
 
 class QuickActionButton extends StatelessWidget {
