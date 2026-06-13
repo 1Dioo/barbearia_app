@@ -1,3 +1,10 @@
+/*
+ * Widget de botão principal reutilizável do aplicativo.
+ *
+ * Utilizado para ações importantes, mantendo o padrão visual
+ * e a consistência da interface em diferentes telas.
+ */
+
 import 'package:flutter/material.dart';
 
 class PrimaryActionButton extends StatelessWidget {
