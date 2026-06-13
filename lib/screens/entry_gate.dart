@@ -1,3 +1,13 @@
+/*
+ * Arquivo: entry_gate.dart
+ * Responsável por verificar o estado inicial do aplicativo.
+ * Define qual tela será exibida ao usuário:
+ * - Introdução (IntroScreen)
+ * - Login (LoginScreen)
+ * - Tela principal (MainShell)
+ * Também exibe um indicador de carregamento enquanto os dados são verificados.
+ */
+
 import 'package:flutter/material.dart';
 import '../services/auth_storage.dart';
 import 'auth/login_screen.dart';
