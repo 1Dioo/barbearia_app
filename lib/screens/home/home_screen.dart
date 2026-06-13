@@ -1,3 +1,9 @@
+/*
+ * Tela inicial do aplicativo.
+ * Exibe informações da barbearia, promoções,
+ * banner principal e atalhos para outras telas.
+ */
+
 import 'package:flutter/material.dart';
 import '../../core/app_brand.dart';
 import '../../widgets/section_title.dart';
