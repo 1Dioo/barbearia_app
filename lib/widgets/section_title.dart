@@ -1,3 +1,11 @@
+/*
+ * Widget responsável por exibir títulos padronizados
+ * nas diferentes seções do aplicativo.
+ *
+ * Pode incluir uma ação opcional para navegação
+ * ou visualização de conteúdo complementar.
+ */
+
 import 'package:flutter/material.dart';
 
 class SectionTitle extends StatelessWidget {
