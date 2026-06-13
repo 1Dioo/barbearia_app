@@ -1,3 +1,11 @@
+/*
+ * Arquivo: intro_screen.dart
+ * Responsável pela apresentação inicial do aplicativo.
+ * Exibe slides informativos sobre os recursos da barbearia.
+ * Permite navegar entre as páginas de introdução.
+ * Ao finalizar, salva a informação de visualização e direciona o usuário para o login.
+ */
+
 import 'package:flutter/material.dart';
 import '../core/app_brand.dart';
 import '../services/auth_storage.dart';
