@@ -1,3 +1,12 @@
+/*
+  Modelo que representa um serviço
+  oferecido pela barbearia.
+
+  Armazena nome, descrição, preço,
+  imagem ilustrativa e duração
+  estimada do atendimento.
+*/
+
 class ServiceModel {
   final String title;
   final String subtitle;
