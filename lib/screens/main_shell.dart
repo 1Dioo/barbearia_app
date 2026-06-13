@@ -1,3 +1,12 @@
+/*
+ * Arquivo: main_shell.dart
+ * Responsável pela navegação principal do aplicativo.
+ * Controla as telas exibidas através da NavigationBar.
+ * Mantém o estado das páginas utilizando IndexedStack.
+ * Centraliza o acesso às seções:
+ * Início, Agenda, Clube, Ofertas e Perfil.
+ */
+
 import 'package:flutter/material.dart';
 import 'appointments/appointments_screen.dart';
 import 'club/club_screen.dart';
