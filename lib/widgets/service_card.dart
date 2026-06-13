@@ -1,3 +1,11 @@
+/*
+ * Widget utilizado para apresentar serviços oferecidos
+ * pela barbearia.
+ *
+ * Exibe imagem, nome, descrição, preço e duração
+ * utilizando dados provenientes do ServiceModel.
+ */
+
 import 'package:flutter/material.dart';
 import '../models/service_model.dart';
 
