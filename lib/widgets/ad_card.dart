@@ -1,3 +1,10 @@
+/*
+ * Widget responsável por exibir banners e anúncios promocionais.
+ *
+ * Apresenta uma imagem, título e descrição de forma organizada,
+ * sendo utilizado nas telas de introdução e divulgação de campanhas.
+ */
+
 import 'package:flutter/material.dart';
 
 class AdCard extends StatelessWidget {
