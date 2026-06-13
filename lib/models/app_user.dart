@@ -1,3 +1,14 @@
+/*
+  Modelo que representa um usuário do sistema.
+
+  Armazena informações como nome, email,
+  senha, telefone e foto de perfil.
+
+  Também possui métodos para converter
+  os dados para Map e JSON, facilitando
+  o armazenamento local.
+*/
+
 import 'dart:convert';
 
 class AppUser {
