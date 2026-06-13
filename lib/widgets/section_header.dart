@@ -1,3 +1,10 @@
+/*
+ * Widget utilizado para criar cabeçalhos de seções.
+ *
+ * Permite exibir um título principal e opcionalmente
+ * uma ação adicional através de um botão de texto.
+ */
+
 import 'package:flutter/material.dart';
 
 class SectionHeader extends StatelessWidget {
