@@ -4,6 +4,14 @@ import '../../services/auth_storage.dart';
 import '../main_shell.dart';
 import 'register_screen.dart';
 
+/*
+ * Tela de login da aplicação.
+ *
+ * Permite que usuários já cadastrados
+ * acessem o sistema utilizando email
+ * e senha.
+ */
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
