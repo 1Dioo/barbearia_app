@@ -2,6 +2,17 @@ import 'package:flutter/material.dart';
 import '../../services/subscription_storage.dart';
 import '../payments/payment_screen.dart';
 
+/*
+ * Tela do Clube de Assinaturas.
+ *
+ * Permite ao usuário visualizar os planos disponíveis,
+ * contratar uma assinatura, consultar informações do
+ * plano ativo e cancelar a assinatura quando desejar.
+ *
+ * Os dados da assinatura são carregados e salvos
+ * utilizando a classe SubscriptionStorage.
+ */
+
 class ClubScreen extends StatefulWidget {
   const ClubScreen({super.key});
 
